@@ -20,7 +20,10 @@
         
         <li><a href="contact.html">Contact</a></li>
       </ul>
+      
+
       <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+      <button id="themeToggle" class="theme-toggle">🌙</button>
     </nav>
   </header>
 
@@ -33,19 +36,19 @@
     <div class="project-card">
       <h3>Smart Garden IoT</h3>
       <p>ESP32 + DHT22 + Relay modules for automation.</p>
-      <img src="assets/Embedded3.drawio (1).jpg" alt="Smart Garden IoT" style="width: 420pt;"/>
+      <img src="assets/Embedded3.drawio (1).png" alt="Smart Garden IoT" />
     </div>
     <div class="project-card">
       <h3>Kadikazi</h3>
       <p>Car Wash Management System.</p>
-      <img src="assets/Carwash.png" alt="Smart Garden IoT" style="width: 420pt;"/>
+      <img src="assets/Carwash.png" alt="Smart Garden IoT" />
     </div>
   </section>
   <footer class="footer">
   <div class="footer-content">
     <p>&copy; 2025 Deo. All rights reserved.</p>
     <div class="social-icons">
-      <a href="https://github.com/Mosweta" target="_blank" aria-label="GitHub">
+      <a href="https:https://github.com/Mosweta" target="_blank" aria-label="GitHub">
         <i class="fab fa-github"></i>
       </a>
       <a href="https://www.linkedin.com/in/deogracious-moriasi-2a0941318?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" aria-label="LinkedIn">
@@ -57,6 +60,41 @@
     </div>
   </div>
 </footer>
+<script>
+  // Theme toggle logic
+  function setInitialTheme() {
+    const savedTheme = localStorage.getItem("theme");
+    const isDark = savedTheme === "dark";
+
+    if (isDark) {
+      document.body.classList.add("dark-mode");
+      document.getElementById("themeToggle").textContent = "☀️";
+    } else {
+      document.body.classList.remove("dark-mode");
+      document.getElementById("themeToggle").textContent = "🌙";
+    }
+  }
+
+  function toggleTheme() {
+    document.body.classList.toggle("dark-mode");
+    const isDark = document.body.classList.contains("dark-mode");
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+    document.getElementById("themeToggle").textContent = isDark ? "☀️" : "🌙";
+  }
+
+  // Toggle nav menu
+  function toggleMenu() {
+    const navLinks = document.getElementById("navLinks");
+    navLinks.classList.toggle("show");
+  }
+
+  // Initialize on page load
+  document.addEventListener("DOMContentLoaded", () => {
+    setInitialTheme();
+
+    document.getElementById("themeToggle").addEventListener("click", toggleTheme);
+  });
+</script>
 
   <script src="script.js"></script>
 </body>

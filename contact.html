@@ -23,7 +23,8 @@
         
         <li><a href="contact.html">Contact</a></li>
       </ul>
-      <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+     <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+      <button id="themeToggle" class="theme-toggle">🌙</button>
     </nav>
   </header>
 
@@ -67,5 +68,69 @@
 </footer>
 
   <script src="script.js"></script>
+  <script>
+  // Set initial theme from localStorage
+  function setInitialTheme() {
+    const savedTheme = localStorage.getItem("theme");
+    const isDark = savedTheme === "dark";
+
+    if (isDark) {
+      document.body.classList.add("dark-mode");
+      document.getElementById("themeToggle").textContent = "☀️";
+    } else {
+      document.body.classList.remove("dark-mode");
+      document.getElementById("themeToggle").textContent = "🌙";
+    }
+  }
+
+  // Toggle between dark and light modes
+  function toggleTheme() {
+    document.body.classList.toggle("dark-mode");
+    const isDark = document.body.classList.contains("dark-mode");
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+    document.getElementById("themeToggle").textContent = isDark ? "☀️" : "🌙";
+  }
+
+  // Toggle nav menu visibility
+  function toggleMenu() {
+    const navLinks = document.getElementById("navLinks");
+    navLinks.classList.toggle("show");
+  }
+
+  // Run when DOM is ready
+  document.addEventListener("DOMContentLoaded", () => {
+    setInitialTheme();
+
+    // Attach theme toggle click handler
+    document.getElementById("themeToggle").addEventListener("click", toggleTheme);
+
+    // Animate and handle form buttons (exclude theme toggle)
+    document.querySelectorAll("button").forEach(button => {
+      if (button.id === "themeToggle") return;
+
+      button.addEventListener("click", (e) => {
+        // Click animation
+        button.classList.add("clicked");
+        setTimeout(() => {
+          button.classList.remove("clicked");
+        }, 150);
+
+        // Handle submit buttons
+        if (button.type === "submit") {
+          button.disabled = true;
+          const originalText = button.textContent;
+          button.textContent = "Sending...";
+          setTimeout(() => {
+            alert("Message sent!");
+            button.textContent = originalText;
+            button.disabled = false;
+            document.querySelector(".contact-form")?.reset(); // Clear form if exists
+          }, 1500);
+        }
+      });
+    });
+  });
+</script>
+
 </body>
 </html>
