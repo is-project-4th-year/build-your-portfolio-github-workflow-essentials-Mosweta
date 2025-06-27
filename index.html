@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Deo | Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+/>
+
+</head>
+<header>
+    <nav class="navbar">
+      <div class="logo">Deogracious Portfolio</div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+      <button id="themeToggle" class="theme-toggle">🌙</button>
+    </nav>
+  </header>
+<body>
+  <!-- Hero Section -->
+  <section id="hero">
+    <img src="assets/profile2.jpg" alt="Profile" class="profile-img" />
+    <h1>Hello, I'm Deo</h1>
+    <p>Software Developer | Tech Enthusiast</p>
+    <p>I’m a passionate developer with a love for building meaningful digital experiences. Skilled in Python, JavaScript, and web development.</p>
+    <p>I love listening to music, watching movies and taking part in charity activities</p>
+    <p>I enjoy collaborating with others and sharing knowledge to create impactful solutions.</p>
+    <p>My favourite technology stack is HTML, CSS, JavaScript, and React.</p>
+    <a href="projects.html" class="btn view-work">View My Work</a>
+  </section>
+<footer class="footer">
+  <div class="footer-content">
+    <p>&copy; 2025 Deo. All rights reserved.</p>
+    <div class="social-icons">
+      <a href="https://github.com/Mosweta" target="_blank" aria-label="GitHub">
+      <i class="fab fa-github"></i>
+      </a>
+      <a href="mailto:deograciousmoriasi10@gmail.com" aria-label="Email">
+        <i class="fas fa-envelope"></i>
+      </a>
+      <a href="https://www.linkedin.com/in/deogracious-moriasi-2a0941318?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" aria-label="LinkedIn">
+        <i class="fab fa-linkedin"></i>
+      </a>
+      
+    </div>
+  </div>
+</footer>
+<script>
+  // Theme toggle logic
+  function setInitialTheme() {
+    const savedTheme = localStorage.getItem("theme");
+    const isDark = savedTheme === "dark";
+
+    if (isDark) {
+      document.body.classList.add("dark-mode");
+      document.getElementById("themeToggle").textContent = "☀️";
+    } else {
+      document.body.classList.remove("dark-mode");
+      document.getElementById("themeToggle").textContent = "🌙";
+    }
+  }
+
+  function toggleTheme() {
+    document.body.classList.toggle("dark-mode");
+    const isDark = document.body.classList.contains("dark-mode");
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+    document.getElementById("themeToggle").textContent = isDark ? "☀️" : "🌙";
+  }
+
+  // Toggle nav menu
+  function toggleMenu() {
+    const navLinks = document.getElementById("navLinks");
+    navLinks.classList.toggle("show");
+  }
+  const viewWorkBtn = document.querySelector(".view-work");
+
+  if (viewWorkBtn) {
+    viewWorkBtn.addEventListener("click", (e) => {
+      viewWorkBtn.classList.add("clicked");
+
+      // Optional: delay navigation for animation
+      e.preventDefault(); // Stop default click
+      setTimeout(() => {
+        window.location.href = viewWorkBtn.getAttribute("href");
+      }, 150); // Wait for animation to finish
+    });
+
+     function toggleMenu() {
+    const navLinks = document.getElementById("navLinks");
+    navLinks.classList.toggle("show");
+  }
+  }
+   // Initialize on page load
+  document.addEventListener("DOMContentLoaded", () => {
+    setInitialTheme();
+
+    document.getElementById("themeToggle").addEventListener("click", toggleTheme);
+  });
+</script>
+
+    
+</body>
